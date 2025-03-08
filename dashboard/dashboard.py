@@ -2,10 +2,17 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
+import os
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-all_data = pd.read_csv("main-bike-sharing.csv")
+
+csv_file = "main-bike-sharing.csv"
+if os.path.exists(csv_file):
+    all_data = pd.read_csv(csv_file)
+else:
+    st.error("File CSV tidak ditemukan! Pastikan file sudah diunggah ke proyek.")
+    st.stop()
 
 def create_total_penyewa():
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
