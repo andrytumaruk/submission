@@ -6,13 +6,8 @@ import os
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-
-csv_file = "main-bike-sharing.csv"
-if os.path.exists(csv_file):
-    all_data = pd.read_csv(csv_file)
-else:
-    st.error("File CSV tidak ditemukan! Pastikan file sudah diunggah ke proyek.")
-    st.stop()
+st.write(f"Current directory: {os.getcwd()}")
+st.write(f"Files: {os.listdir()}")
 
 def create_total_penyewa():
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
