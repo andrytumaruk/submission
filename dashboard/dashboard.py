@@ -4,16 +4,10 @@ import seaborn as sns
 import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
-# Define CSV file path
-csv_file = "dashboard/main-bike-sharing.csv"
 
-# Check if the file exists
-if os.path.exists(csv_file):
-    all_data = pd.read_csv(csv_file)
-else:
-    st.error(f"File '{csv_file}' not found. Please upload the correct dataset.")
-    st.stop()  # Stop execution if the file is missing
+csv_file = "main-bike-sharing.csv"
 
+all_data = pd.read_csv(csv_file)
 def create_total_penyewa():
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
     season_mapping = {1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'}
