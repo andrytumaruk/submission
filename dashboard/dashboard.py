@@ -72,10 +72,10 @@ with st.sidebar:
         options=['Morning', 'Afternoon', 'Evening', 'Night'],
         default=['Morning', 'Afternoon', 'Evening', 'Night']
     )
-    
+    total_orders, filtered_df = filter_data(all_data, season_filter, time_filter)
 st.title('Dashboard Bike Share :sparkles:')
 
-total_orders, filtered_df = filter_data(all_data, season_filter, time_filter)
+
     
 st.header("Total Penyewaan:")
 st.subheader(f"{total_orders} orang")
