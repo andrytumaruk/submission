@@ -7,8 +7,9 @@ sns.set(style='dark')
 
 csv_file = "main-bike-sharing.csv"
 
-all_data = pd.read_csv(csv_file)
+
 def create_total_penyewa():
+    all_data = pd.read_csv(csv_file)
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
     season_mapping = {1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'}
     all_data['season'] = all_data['season'].map(season_mapping)  
