@@ -5,11 +5,9 @@ import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-csv_file = "main-bike-sharing.csv"
-
+all_data = pd.read_csv("main-bike-sharing.csv")
 
 def create_total_penyewa():
-    all_data = pd.read_csv(csv_file)
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
     season_mapping = {1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'}
     all_data['season'] = all_data['season'].map(season_mapping)  
@@ -33,6 +31,7 @@ def filter_data(df, season_filter, time_filter):
     total_orders = filtered_df['cnt'].sum()
     return total_orders, filtered_df
 
+
 def create_byseason_chart(filtered_df, df):
     if filtered_df.empty:
         season_avg = df.groupby('season')['cnt'].mean().sort_values(ascending=False)
@@ -40,7 +39,7 @@ def create_byseason_chart(filtered_df, df):
         season_avg = filtered_df.groupby('season')['cnt'].mean().sort_values(ascending=False)
     
     plt.figure(figsize=(8, 5))
-    sns.barplot(x=season_avg.index, y=season_avg.values, palette='coolwarm')
+    sns.barplot(hue=season_avg.index, y=season_avg.values, palette='coolwarm')
     plt.xlabel("Musim")
     plt.ylabel("Rata-rata Penyewaan Sepeda")
     plt.title("Rata-rata Penyewaan Sepeda Berdasarkan Musim")
@@ -53,7 +52,7 @@ def create_byhour_chart(filtered_df, df):
         hour_avg = filtered_df.groupby('hr')['cnt'].mean().sort_index()
     
     plt.figure(figsize=(10, 5))
-    sns.barplot(x=hour_avg.index, y=hour_avg.values, palette='viridis')
+    sns.barplot(hue=hour_avg.index, y=hour_avg.values,palette='viridis')
     plt.xlabel("Jam")
     plt.ylabel("Rata-rata Penyewaan Sepeda")
     plt.title("Jumlah Peminjaman Sepeda Berdasarkan Jam")
@@ -83,12 +82,10 @@ st.header("Total Penyewaan:")
 st.subheader(f"{total_orders} orang")
 
 st.header(" Penyewaan Berdasarkan Musim")
-create_byseason_chart(filtered_df, all_data)
-
-st.header("Penyewaan Berdasarkan Jam")
-create_byhour_chart(filtered_df, all_data)
-
-st.caption('Copyright (c) Andry Septian Syahputra Tumaruk 2025')
+create_byseason_chart(filtered_df,all_data)
     
 
+st.header("Penyewaan Berdasarkan jam")
+create_byhour_chart(filtered_df,all_data)
 
+st.caption('Copyright (c) andry septian syahputra tumaruk 2025')
