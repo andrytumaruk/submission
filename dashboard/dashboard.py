@@ -5,10 +5,9 @@ import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-
+all_data = pd.read_csv("main-bike-sharing.csv")
 
 def create_total_penyewa():
-    all_data = pd.read_csv('main-bike-sharing.csv')
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
     season_mapping = {1: 'Spring', 2: 'Summer', 3: 'Fall', 4: 'Winter'}
     all_data['season'] = all_data['season'].map(season_mapping)  
