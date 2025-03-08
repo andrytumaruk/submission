@@ -5,8 +5,6 @@ import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-
-
 def create_total_penyewa():
     all_data = pd.read_csv('main-bike-sharing.csv')
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
@@ -72,17 +70,18 @@ with st.sidebar:
         options=['Morning', 'Afternoon', 'Evening', 'Night'],
         default=['Morning', 'Afternoon', 'Evening', 'Night']
     )
-    total_orders, filtered_df = filter_data(all_data, season_filter, time_filter)
+    
+all_data = create_total_penyewa()
 st.title('Dashboard Bike Share :sparkles:')
 
-
+total_orders, filtered_df = filter_data(all_data, season_filter, time_filter)
     
 st.header("Total Penyewaan:")
 st.subheader(f"{total_orders} orang")
 
 st.header(" Penyewaan Berdasarkan Musim")
 create_byseason_chart(filtered_df,all_data)
-    
+        
 
 st.header("Penyewaan Berdasarkan jam")
 create_byhour_chart(filtered_df,all_data)
