@@ -5,7 +5,7 @@ import streamlit as st
 from babel.numbers import format_currency
 sns.set(style='dark')
 # Define CSV file path
-csv_file = "main-bike-sharing.csv"
+csv_file = "dashboard/main-bike-sharing.csv"
 
 # Check if the file exists
 if os.path.exists(csv_file):
