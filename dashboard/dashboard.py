@@ -2,12 +2,10 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import streamlit as st
-import os
 from babel.numbers import format_currency
 sns.set(style='dark')
 
-st.write(f"Current directory: {os.getcwd()}")
-st.write(f"Files: {os.listdir()}")
+all_data = pd.read_csv("main-bike-sharing.csv")
 
 def create_total_penyewa():
     all_data['dteday'] = pd.to_datetime(all_data['dteday'])  
@@ -91,3 +89,6 @@ st.header("Penyewaan Berdasarkan jam")
 create_byhour_chart(filtered_df,all_data)
 
 st.caption('Copyright (c) andry septian syahputra tumaruk 2025')
+    
+
+
