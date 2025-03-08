@@ -39,7 +39,7 @@ def create_byseason_chart(filtered_df, df):
         season_avg = filtered_df.groupby('season')['cnt'].mean().sort_values(ascending=False)
     
     plt.figure(figsize=(8, 5))
-    sns.barplot(hue=season_avg.index, y=season_avg.values, palette='coolwarm')
+    sns.barplot(x=season_avg.index, y=season_avg.values, palette='coolwarm')
     plt.xlabel("Musim")
     plt.ylabel("Rata-rata Penyewaan Sepeda")
     plt.title("Rata-rata Penyewaan Sepeda Berdasarkan Musim")
@@ -52,7 +52,7 @@ def create_byhour_chart(filtered_df, df):
         hour_avg = filtered_df.groupby('hr')['cnt'].mean().sort_index()
     
     plt.figure(figsize=(10, 5))
-    sns.barplot(hue=hour_avg.index, y=hour_avg.values,palette='viridis')
+    sns.barplot(x=hour_avg.index, y=hour_avg.values,palette='viridis')
     plt.xlabel("Jam")
     plt.ylabel("Rata-rata Penyewaan Sepeda")
     plt.title("Jumlah Peminjaman Sepeda Berdasarkan Jam")
